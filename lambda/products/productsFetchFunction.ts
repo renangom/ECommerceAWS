@@ -16,6 +16,17 @@ export async function handler(event: APIGatewayProxyEvent, context: Context):Pro
                 })
             }
         }
+    }else if(event.resource === "/products/{id}"){
+        const productId = event.pathParameters!.id as string
+        if(event.httpMethod === 'GET'){
+            console.log(`GET /products/${productId}`)
+            return{
+                statusCode: 200,
+                body: JSON.stringify({
+                    message:`GET /products/${productId}`
+                })
+            }
+        }
     }
     return {
         statusCode: 400,

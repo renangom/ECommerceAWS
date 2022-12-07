@@ -45,6 +45,16 @@ export class EcommerceApiStack extends cdk.Stack{
         const productIdResource = productsResource.addResource("{id}")
         productIdResource.addMethod("GET", productsFetchIntegration)
 
+        // parte administrativa
+        const productsAdminIntegration = new apigateway.LambdaIntegration(props.productsAdminHandler)
+
+        // POST /products
+        productsResource.addMethod("POST", productsAdminIntegration)
+
+        // PUT /products/{id}
+        productIdResource.addMethod("POST", productsAdminIntegration)
         
+        // DELETE /products/{id}
+        productIdResource.addMethod("DELETE", productsAdminIntegration)
     }
 }
