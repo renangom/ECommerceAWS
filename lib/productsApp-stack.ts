@@ -33,7 +33,11 @@ export class ProductsAppStack extends cdk.Stack {
             bundling: {
                 minify: true,
                 sourceMap: false
+            },
+            environment: {
+                PRODUCTS_DDB: this.productsDdb.tableName
             }
         })
+        this.productsDdb.grantReadData(this.productsFetchHandler)
     }
 }
